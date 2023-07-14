@@ -5,13 +5,13 @@ import { AppError } from "../../../../errors/AppErrors";
 
 export class CreateMovieUseCase{
 
-    async execute({title, duration, release_date}: CreateMovieDTO): Promise<Movie>{
+    async execute({title, duration, release_date,}: CreateMovieDTO): Promise<Movie>{
         //verificar se o filme já existe
         const movieAlreadyExists = await prisma.movie.findUnique({
             where: {
                 //como as variáveis possuem o mesmo nome, basta colocar somente email
                 title,
-            }
+            },
         });
 
         if(movieAlreadyExists){
@@ -26,8 +26,8 @@ export class CreateMovieUseCase{
             data: {
                 title, 
                 duration,
-                release_date
-            }
+                release_date,
+            },
         });
 
         //retornando um usuário criado
